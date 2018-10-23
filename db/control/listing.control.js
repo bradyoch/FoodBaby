@@ -16,7 +16,7 @@ exports.create = function(req, res) {
 exports.find = function(req, res) {
   let listing = req.params.listingId;
 
-  listings.findOne({"_id": listing}, (err, entry) => {
+  listings.findOne({'_id': listing}, (err, entry) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
