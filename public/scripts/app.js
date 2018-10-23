@@ -1,14 +1,14 @@
 var app = angular.module('foodBaby', []);
 
-app.controller('ListingsCtrl', ($scope, $http) => {
-  $http.get('/api/listings').then((response) => {
+app.controller('HomeCtrl', ($scope, $http) => {
+  $http.get('/api/listings/upcoming/0-3').then((response) => {
     $scope.listings = response.data;
   }, (error) => {
     console.log('Unable to retrieve listings: ', error);
   });
 
-  $http.get('/api/listings/recent').then((response) => {
-    $scope.recent = response.data;
+  $http.get('/api/listings/recent/0-1').then((response) => {
+    $scope.recent = response.data[0];
   }, (error) => {
     console.log('Unable to retrieve listings: ', error);
   });
@@ -18,3 +18,6 @@ app.controller('ListingsCtrl', ($scope, $http) => {
   }
 });
 
+app.controller('ListingsCtrl', ($scope, $http) => {
+
+});

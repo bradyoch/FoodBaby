@@ -12,8 +12,17 @@ router.route('/listings')
   .get(db.listings.list)
   .post(db.listings.create);
 
+router.route('/listings/upcoming')
+  .get(db.listings.upcoming);
+
+router.route('/listings/upcoming/:from-:to')
+  .get(db.listings.upcomingRange);
+
 router.route('/listings/recent')
   .get(db.listings.recent);
+
+router.route('/listings/recent/:from-:to')
+  .get(db.listings.recentRange);
 
 router.route('/listings/id/:listingId')
   .get(db.listings.find)

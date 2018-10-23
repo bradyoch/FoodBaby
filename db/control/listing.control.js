@@ -16,7 +16,7 @@ exports.create = function(req, res) {
 exports.find = function(req, res) {
   let listing = req.params.listingId;
 
-  listings.findOne({'_id': listing}, (err, entry) => {
+  listings.findOne({"_id": listing}, (err, entry) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
@@ -64,13 +64,72 @@ exports.list = function(req, res) {
   });
 }
 
+exports.recentRange = function(req, res) {
+  let from = parseInt(req.params.from),
+    to = parseInt(req.params.to);
+
+  listings.find({})
+    .sort({ created_at: -1 })
+    .where('created_at')
+    .lte(Date.now())
+    .skip(from)
+    .limit(to - from)
+    .exec((err, entries) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        res.json(entries);
+      }
+    });
+}
+
 exports.recent = function(req, res) {
-  listings.findOne({}).sort('created_at').exec((err, entry) => {
-    if (err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.json(entry);
-    }
-  });
+  listings.find({})
+    .sort({ created_at: -1 })
+    .where('created_at')
+    .lte(Date.now())
+    .exec((err, entries) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        res.json(entries);
+      }
+    });
+}
+
+exports.upcomingRange = function(req, res) {
+  let from = parseInt(req.params.from),
+    to = parseInt(req.params.to);
+
+  listings.find({})
+    .sort('time.start')
+    .where('time.start')
+    .gte(Date.now())
+    .skip(from)
+    .limit(to - from)
+    .exec((err, entries) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        res.json(entries);
+      }
+    });
+}
+
+exports.upcoming = function(req, res) {
+  listings.find({})
+    .sort('time.start')
+    .where('time.start')
+    .gte(Date.now())
+    .exec((err, entries) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      } else {
+        res.json(entries);
+      }
+    });
 }

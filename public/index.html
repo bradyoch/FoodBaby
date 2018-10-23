@@ -10,7 +10,7 @@
 </head>
 
 <body ng-app="foodBaby">
-  <div class="container" ng-controller="ListingsCtrl">
+  <div class="container" ng-controller="HomeCtrl">
     <div class="row">
       <h1>Food Baby</h1>
     </div>
@@ -20,7 +20,7 @@
     <div class="tablewrapper col-md-6">
       <table class="table table-hover" ng-click="view(recent._id)">
         <tr>
-          <th>Recently Added</th>
+          <th colspan="4" style="text-align:center;">Recently Added</th>
         </tr>
         <tr>
           <th>Name</th>
@@ -50,7 +50,7 @@
     <div class="tablewrapper col-md-6">
       <table class="table table-hover">
         <tr>
-          <th>Upcoming Events</th>
+          <th colspan="4" style="text-align:center;">Upcoming Events</th>
         </tr>
         <tr>
           <th>Name</th>
