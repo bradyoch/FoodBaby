@@ -12,11 +12,11 @@ process.env.NODE_ENV = 'test';
 
 describe('Location', function() {
   describe('Get locations', function() {
-    it('should return database of size 147', function(done) {
+    it('should return database of size 141', function(done) {
       Location.find({}, function(err, entries) {
         expect(err).to.be.null;
         entries.should.be.an('array');
-        entries.should.have.lengthOf(147);
+        entries.should.have.lengthOf(141);
 
         done();
       });
